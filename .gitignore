@@ -1,0 +1,15 @@
+# Данные Yambda в репозиторий не едут и не копируются: 523 МБ остаются там, где скачаны,
+# а код находит их через переменную окружения YAMBDA_DATA или по соседству (см.
+# models/common.py, функция data_dir). Воспроизведение — tools/download_data.sh и
+# tools/build_subsample.py, инструкции в README.
+data/*
+!data/README.md
+
+# Матрицы оценок моделей, по 120 МБ каждая — выше лимита GitHub в 100 МБ на файл.
+# Пересчитываются запуском соответствующего models/run_*.py
+*.npy
+!models/curves.npy
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
