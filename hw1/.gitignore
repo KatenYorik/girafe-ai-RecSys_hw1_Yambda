@@ -1,7 +1,7 @@
 # Данные Yambda в репозиторий не едут и не копируются: 523 МБ остаются там, где скачаны,
-# а код находит их через переменную окружения YAMBDA_DATA или по соседству (см.
-# models/common.py, функция data_dir). Воспроизведение — tools/download_data.sh и
-# tools/build_subsample.py, инструкции в README.
+# а код находит их через переменную окружения YAMBDA_DATA или рядом (см. models/common.py,
+# функция data_dir). Воспроизведение — tools/download_data.sh и tools/build_subsample.py,
+# инструкции в DATA.md.
 data/*
 !data/README.md
 

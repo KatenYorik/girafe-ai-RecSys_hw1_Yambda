@@ -34,15 +34,16 @@ _UP = os.path.dirname(_HERE)                     # каталог над models/
 def data_dir():
     """Каталог с данными — ищется, а не зашивается.
 
-    Данные (523 МБ) намеренно не дублируются между репозиторием сдачи и рабочим
-    каталогом, поэтому путь определяется по порядку: переменная окружения
-    `YAMBDA_DATA`, затем `data/` рядом с этим кодом, затем `../hw1/data` — так
-    `models/` работает и из репозитория, где данных нет, а лежат они по соседству.
+    Данные (523 МБ) в репозиторий не входят, поэтому путь не прописан константой.
+    Порядок поиска: переменная окружения `YAMBDA_DATA`, затем `data/` и `data/`
+    рядом с кодом и на несколько каталогов выше. Так один и тот же код работает и
+    когда данные скачаны внутрь репозитория, и когда они лежат по соседству.
     """
-    cands = [os.environ.get("YAMBDA_DATA"),
-             os.path.join(_UP, "data"),
-             os.path.join(os.path.dirname(_UP), "hw1", "data"),
-             os.path.join(os.path.dirname(_UP), "RecSys", "hw1", "data")]
+    cands = [os.environ.get("YAMBDA_DATA")]
+    d = _UP
+    for _ in range(4):
+        cands += [os.path.join(d, "data"), os.path.join(d, "hw1", "data")]
+        d = os.path.dirname(d)
     for c in cands:
         if c and os.path.isdir(os.path.join(c, "subsample")):
             return c
